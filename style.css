@@ -7,9 +7,10 @@ html {
 body {
     height: 100%;
     width: 100%;
+    margin: 0;
     display: flex;
     justify-content: center;
-    background-color: rgb(197, 192, 192);
+    background-color: rgb(216, 216, 216);
 }
 
 h1 {
@@ -18,16 +19,19 @@ h1 {
 }
 
 .div-container {
+
     margin-top: 15rem;
+    width: 65rem;
     height: 30rem;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     margin: none;
-    background-color: #0f766e; 
+    background-color: #3e3e3e; 
     gap: 1rem;  
     padding: 0 1rem;
+    box-shadow: -1px 0px 34px 1px rgba(0,0,0,0.58);
 }
 
 #form {
@@ -35,28 +39,28 @@ h1 {
     gap: 1rem; 
 }
 
-
-#input-name {
-    padding: 0.5rem;
-    flex-grow: 1rem;
-    outline: none;   
-    border-radius: 1rem; 
-    font-size: 1rem;
-    background-color: rgb(255, 253, 253);
+#input-name ,
+#input-number{
+    border-style: none;
+    background-color: #3e3e3e;
+    border-bottom: 1px solid #00ffcc;
+    outline: none;
+    padding: 1rem 0.5rem;
+    color: white;
+    font-size: 1.4rem;
+}
+#input-name::placeholder ,
+#input-number::placeholder{
+    background-color: #3e3e3e;
+}
+::placeholder{
+    color: #bfbfbf;
 }
 
-#input-number {
-    padding: 0.5rem;
-    flex-grow: 1rem;
-    outline: none;   
-    border-radius: 1rem; 
-    font-size: 1rem;
-    background-color: rgb(255, 255, 255);
-}
 
 .list-container{
     padding: 0 2rem;
-    background-color: #0b5650;
+    background-color: #242424;
     overflow-y: scroll;
     scroll-behavior: smooth;
 }
@@ -69,6 +73,7 @@ h1 {
     gap: 1rem;
 }
 
+
 .btn-li-borrar,
 .btn-li-editar{
     text-decoration: none;
@@ -76,10 +81,33 @@ h1 {
     border: none;
     padding: 0;
     align-items: center;
+    cursor: pointer;
+}
+
+.btn-li-borrar path,
+.btn-li-editar path{
+    fill: white;
+}
+
+.btn-li-borrar:hover path{
+    fill: red;
+}
+.btn-li-editar:hover path{
+    fill: green;
 }
 
 #form-btn {
-    background-color: aliceblue;
+    background-color: #3e3e3e;
+    padding: .5rem 2rem;
+    border-style: none;
+    border: 1px solid rgb(0, 255, 204);
+    color: white;
+    cursor: pointer;
+    transition: all 0.5s ease-in-out;
+}
+#form-btn:hover {
+    background-color: rgb(0, 255, 204);
+    color: #3e3e3e;
 }
 
 .svg {
@@ -87,6 +115,7 @@ h1 {
     width: 3rem;
     border-radius: none;
 }
+
 
 .error,
 .success {
@@ -96,7 +125,6 @@ h1 {
     text-align: center;
     color: white;
     font-size: 1.1rem;
-    text-transform: uppercase;
 }
 
 .error {
@@ -110,20 +138,29 @@ h1 {
 .readyBtn{
     opacity: 1;
 }
+.divInputsMostrar{
+    display: flex;
+    gap: 1rem;
+}
 
-.show {
-    display: block;
+.divInputsMostrar input{
+    border-style: none;
+    background-color: #242424;
+    color: white;
+    outline: none;
+    border-bottom:1px solid rgb(0, 255, 204) ;
+    padding: 0.3rem 0.3rem;
 }
 
 @media (max-width: 883px) {
     .div-container
      {
       display: flex;
-      height: 35rem;
-      width: 25rem;
+      height: 40rem;
+      width: 30rem;
     }
     h1 {
-        font-size: 2rem;
+        font-size: 2.2rem;
     }
     #form {
         display: flex;
@@ -133,16 +170,21 @@ h1 {
     {
         display: flex;
         flex-direction: column;
-        padding: 0.5rem 0.5rem;
+        padding: 0.3rem 0.3rem;
 
     }
 
     .list-container li input {
         display: block;
-        width: 10rem;
+        width: 80%;
     }
     .svg {
         width: 2.5rem;
         height: 2.5rem;
+    }
+
+    #input-name,
+    #input-number{
+        font-size: 1.2rem;
     }
   } 

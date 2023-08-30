@@ -29,18 +29,20 @@ function validar(e){
     const inputActual = e.target.name;
     const inputContenido = e.target.value;
 
+    
+
     if(inputContenido.trim() === ''){
         mostrarAlert(`Ningun campo puede ir vacio`, 1);
         return;
     }
-    if ((!validarNombre(inputContenido) && inputActual ==='nombre') && inputContenido < 3) {
-        mostrarAlert(`el campo ${inputActual} no cumple los requisitos`, 1);
+    if (!validarNombre(inputContenido) && inputActual ==='nombre') {
+        mostrarAlert(`El nombre debe iniciar con mayuscula. Ej: Gerald`, 1);
         habilitarBoton();
         return;
         
     }
     if(!validarNumero(inputContenido) && inputActual === 'telefono'){
-        mostrarAlert(`el campo ${inputActual} debe ser un numero valido`, 1); 
+        mostrarAlert(`El numero debe ser venezolano (412,414,416,424,426)`, 1); 
         habilitarBoton();
         return;
     }
@@ -77,13 +79,18 @@ function mostrarAlert(mensaje, tipo) {
             error.textContent = mensaje;
             divAlerta.classList.add('error', 'alertaDiv')
             divAlerta.appendChild(error);
+            document.querySelector('.div-container').insertBefore(divAlerta, form);
             break;
-    
-        case 2:
-            const exito = document.createElement('p');
-            exito.textContent = mensaje;
-            divAlerta.classList.add('success', 'alertaDiv');
-            divAlerta.appendChild(exito);
+            
+            case 2:
+                const exito = document.createElement('p');
+                exito.textContent = mensaje;
+                divAlerta.classList.add('success', 'alertaDiv');
+                divAlerta.appendChild(exito);
+                document.querySelector('.div-container').insertBefore(divAlerta, form);
+                setTimeout(() => {
+                    divAlerta.remove();
+                }, 2000);
             break;
 
         default:
@@ -91,12 +98,8 @@ function mostrarAlert(mensaje, tipo) {
     }
     
 
-    document.querySelector('.div-container').insertBefore(divAlerta, form);
 
 
-    setTimeout(() => {
-        divAlerta.remove();
-    }, 2000);
     
 
 }
@@ -188,7 +191,20 @@ function imprimirHTML(arrConctact) {
                     mostrarName.readOnly = false; 
                     mostrarNumero.readOnly = false; 
                     return; 
-                }else{ 
+                }else{
+                    
+                    const nombreValido = validarNombre(mostrarName.value);
+                    const numeroValido = validarNumero(mostrarNumero.value);
+
+                    if (!nombreValido) {
+                        mostrarAlert(`El campo nombre no cumple los requisitos`, 1);
+                        return;
+                    }
+
+                    if (!numeroValido) {
+                        mostrarAlert(`El campo número debe ser un número válido`, 1);
+                        return;
+                    }
                     mostrarName.readOnly = true; 
                     mostrarNumero.readOnly = true; 
  
@@ -205,6 +221,7 @@ function imprimirHTML(arrConctact) {
                     } 
      
                     sincronizarStorage(); 
+                    mostrarAlert(`Se ha actualizado el contacto exitosamente`, 2)
                 } 
  
      
@@ -231,6 +248,7 @@ function eliminarContacto(id) {
     contactos = contactos.filter( contacto => contacto.id != id);
     imprimirHTML(contactos);
 }
+
 
 
 
